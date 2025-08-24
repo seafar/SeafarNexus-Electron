@@ -1,0 +1,180 @@
+/* css/details.css (V4 - Complete and unabbreviated final version with Lightbox) */
+
+/* 全局設定 */
+html, body {
+    height: 100%; width: 100%; margin: 0; padding: 0;
+    font-family: sans-serif; background-color: #f0f2f5;
+    overflow: hidden; font-size: 14px;
+}
+
+/* 主容器 */
+.details-container {
+    display: flex; flex-direction: column;
+    height: 100vh; padding: 20px; box-sizing: border-box;
+}
+.details-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; flex-shrink: 0;
+}
+.details-header h1 { margin: 0; font-size: 24px; color: #333; }
+
+.details-body {
+    display: flex; flex-direction: column;
+    flex-grow: 1; overflow: hidden;
+    background: #fff; border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+/* Tab 分頁列 */
+.tab-bar {
+    display: flex;
+    border-bottom: 1px solid #dee2e6;
+    flex-shrink: 0;
+    padding: 0 10px;
+}
+.tab-button {
+    padding: 12px 18px; border: none; background: transparent;
+    cursor: pointer; font-size: 15px; color: #6c757d;
+    border-bottom: 3px solid transparent; transition: all 0.2s;
+}
+.tab-button:hover { color: #007bff; }
+.tab-button.active {
+    color: #007bff;
+    border-bottom-color: #007bff;
+    font-weight: bold;
+}
+
+/* Tab 內容 */
+.tab-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* 表單網格布局 */
+/* css/details.css */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 20px;
+}
+.form-section { display: flex; flex-direction: column; gap: 15px; }
+.form-section h2 {
+    font-size: 18px; color: #495057; margin: 0 0 5px 0;
+    padding-bottom: 5px; border-bottom: 1px solid #eee;
+}
+.input-group { display: flex; flex-direction: column; }
+.input-group label { margin-bottom: 5px; font-weight: bold; color: #555; }
+.input-group input, .input-group select, .input-group textarea {
+    width: 100%; padding: 8px; border: 1px solid #ccc;
+    border-radius: 4px; box-sizing: border-box; font-size: 14px;
+}
+.input-group input[type="file"] {
+    padding: 4px;
+}
+.input-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+.radio-group label { display: inline-block; margin-right: 15px; }
+.date-group { display: flex; gap: 10px; }
+.date-group > div { flex: 1; }
+.tst-display {
+    margin-top: 10px; padding: 8px; background-color: #e9ecef;
+    border-radius: 4px; font-size: 13px; color: #495057;
+}
+
+/* --- Styles from previous fixes --- */
+.input-group input:disabled,
+.input-group select:disabled {
+    background-color: #e9ecef; cursor: not-allowed; opacity: 0.7;
+}
+
+.checkbox-line {
+    display: flex; flex-direction: row; align-items: center;
+    gap: 6px; margin-top: 5px;
+}
+.checkbox-line label { margin-bottom: 0; font-weight: normal; }
+
+.header-btn {
+    background-color: #28a745; color: white; border: none;
+    border-radius: 5px; padding: 10px 20px; font-size: 16px;
+    cursor: pointer; transition: background-color 0.2s;
+    margin-left: 10px;
+}
+.header-btn:hover { background-color: #218838; }
+.header-btn#view-case-btn,
+.header-btn#main-edit-btn { /* Applied to both IDs for consistency */
+    background-color: #007bff;
+}
+.header-btn#view-case-btn:hover,
+.header-btn#main-edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.media-list { display: flex; flex-direction: column; gap: 10px; }
+.media-list-item { display: flex; align-items: center; gap: 10px; }
+.media-list-item input[type="text"] { flex-grow: 1; }
+.media-list-item button.remove-media-btn, 
+#remove-profile-image-btn {
+    padding: 4px 8px; background-color: #dc3545; color: white;
+    border: none; border-radius: 4px; cursor: pointer; flex-shrink: 0;
+}
+#add-media-btn {
+    margin-top: 10px; padding: 8px; background-color: #17a2b8;
+    color: white; border: none; border-radius: 4px; cursor: pointer;
+}
+
+/* Lightbox 樣式 */
+#lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+#lightbox-container {
+    position: relative;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    max-width: 90vw;
+    max-height: 90vh;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+#lightbox-close-btn {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background-color: white;
+    border: 2px solid #333;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    line-height: 26px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+}
+
+#lightbox-content video,
+#lightbox-content img {
+    max-width: 100%;
+    max-height: calc(90vh - 40px); /* 減去一些 padding */
+    display: none; /* 預設都隱藏 */
+}
+
+.hidden {
+    display: none !important;
+}

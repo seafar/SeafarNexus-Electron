@@ -1,0 +1,307 @@
+/* 全局設定 */
+html, body {
+    height: 100%; width: 100%;
+    margin: 0; padding: 0;
+    overflow: auto;
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+}
+.hidden { display: none !important; }
+
+/* 主容器 */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+/* 內容區域 (三欄式) */
+.content-area {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* 中央命盤區域 */
+#chart-wrapper {
+    width: 590px;
+    height: 590px;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#chart-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* 左右控制面板 */
+#left-controls.controls-panel {
+    width: 150px; 
+}
+#right-controls.controls-panel {
+    width: 180px;
+}
+.controls-panel {
+    height: 590px;
+    flex-shrink: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+#left-controls .language-switcher {
+    border-bottom: 1px solid #eee;
+}
+.language-switcher {
+    text-align: center;
+    padding: 8px 0;
+    flex-shrink: 0;
+    font-size: 13px;
+}
+.language-switcher a { color: #007bff; text-decoration: none; padding: 0 5px; }
+.language-switcher a.active { font-weight: bold; color: #333; cursor: default; text-decoration: none; }
+
+/* 四化Tabs */
+.vertical-tabs-container {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+}
+.vertical-tab-buttons {
+    display: flex; flex-direction: column;
+    border-right: 1px solid #ccc;
+    flex-shrink: 0;
+    background-color: #f8f9fa;
+}
+.tab-button {
+    padding: 12px 10px; border: none; background-color: transparent;
+    cursor: pointer; font-size: 14px; font-weight: bold; text-align: center;
+    border-bottom: 1px solid #ddd; width: 100%;
+    transition: background-color 0.2s; border-left: 3px solid transparent;
+}
+.tab-button:hover { background-color: #e9ecef; }
+.tab-button.active { background-color: #fff; border-left-color: #007bff; }
+.vertical-tab-buttons .tab-button[data-tab="tab-jilu"] { color: magenta; }
+.vertical-tab-buttons .tab-button[data-tab="tab-lu"]   { color: #DAA520; }
+.vertical-tab-buttons .tab-button[data-tab="tab-quan"] { color: #006400; }
+.vertical-tab-buttons .tab-button[data-tab="tab-ke"]   { color: #1E90FF; }
+.vertical-tab-buttons .tab-button[data-tab="tab-ji"]   { color: #333333; }
+
+.tab-content { padding: 10px 5px; flex-grow: 1; overflow-y: auto; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.checkbox-item input { display: none; }
+.checkbox-item label {
+    display: block; 
+    padding: 3px 5px;
+    border: 1px solid #ddd; 
+    border-radius: 4px;
+    cursor: pointer; 
+    background-color: #f8f9fa; 
+    font-size: 13px;
+    transition: all 0.2s ease-in-out; 
+    text-align: center;
+}
+.checkbox-item label:hover { border-color: #007bff; }
+.checkbox-item input:checked + label { background-color: #007bff; color: white; border-color: #0056b3; }
+.actions { display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
+.actions button {
+    padding: 6px; font-size: 13px; cursor: pointer;
+    border: 1px solid #ccc; border-radius: 4px; color: white;
+}
+.actions .show-all { background-color: #007bff; }
+.actions .clear-all { background-color: #6c757d; }
+.cycle-button { color: white; }
+.cycle-button-lu { background-color: #DAA520; }
+.cycle-button-quan { background-color: #006400; }
+.cycle-button-ke { background-color: #1E90FF; }
+.cycle-button-ji { background-color: #333333; }
+
+
+/* 右側面板 */
+.flow-analysis-container {
+    padding: 10px; border-bottom: 1px solid #eee; flex-shrink: 0;
+}
+.flow-button-group { display: flex; gap: 10px; }
+.flow-control-btn {
+    flex: 1; padding: 8px; background-color: #6c757d; color: white;
+    border: none; border-radius: 4px; cursor: pointer;
+    font-size: 14px; transition: background-color 0.2s, box-shadow 0.2s;
+}
+.flow-control-btn.active {
+    background-color: #28a745; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+#flow-options-wrapper {
+    margin-top: 10px; display: flex; flex-direction: column;
+    gap: 10px; padding-top: 10px; border-top: 1px solid #f0f0f0;
+}
+.flow-group { display: flex; flex-direction: column; }
+.flow-group label {
+    font-size: 13px; font-weight: bold;
+    color: #555; margin-bottom: 4px;
+}
+.flow-group select, .flow-group input {
+    width: 100%; padding: 6px; border: 1px solid #ccc;
+    border-radius: 4px; font-size: 14px; box-sizing: border-box;
+}
+
+/* 【最終修正】外觀設定樣式 */
+.appearance-settings-container {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+}
+.appearance-settings-container h3 {
+    font-size: 14px;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 12px;
+    text-align: center;
+}
+.setting-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.setting-group label {
+    font-size: 13px;
+    color: #555;
+    flex-shrink: 0;
+    margin-right: 5px;
+}
+.setting-group input[type="color"] {
+    width: 50px;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 2px;
+    background-color: white;
+    cursor: pointer;
+}
+.setting-group input[type="range"] {
+    width: 100%;
+    flex-grow: 1;
+}
+
+.global-actions {
+    padding: 10px; margin-top: auto;
+}
+.global-actions button, .global-actions a {
+    width: 100%; padding: 10px; margin-top: 8px; border-radius: 5px;
+    cursor: pointer; display: block; text-align: center; box-sizing: border-box;
+    text-decoration: none; font-size: 14px; border: none; color: white;
+}
+#clear-all-arrows-btn { background-color: #dc3545; }
+#download-btn { background-color: #007bff; }
+#new-chart-link { background-color: #28a745; }
+.checkbox-item-bg { margin-top: 8px; text-align: center; }
+.checkbox-item-bg input { display: none; }
+.checkbox-item-bg label {
+    display: block; width: 100%; padding: 8px 5px; border: 1px solid #ddd;
+    border-radius: 4px; cursor: pointer; background-color: #f8f9fa;
+    font-size: 13px; transition: all 0.2s ease-in-out;
+    box-sizing: border-box; color: #333;
+}
+.checkbox-item-bg label:hover { border-color: #007bff; }
+.checkbox-item-bg input:checked + label { background-color: #6c757d; color: white; border-color: #5a6268; }
+
+/* 響應式設計 */
+@media (max-width: 1100px) {
+    .content-area { 
+        flex-direction: column; 
+        align-items: stretch;
+        justify-content: flex-start;
+    }
+    #chart-wrapper { 
+        order: 1; 
+        width: 100%;
+        max-width: none;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+    #left-controls { 
+        order: 2; 
+        margin-bottom: 15px;
+    }
+    #right-controls { 
+        order: 3; 
+    }
+    #left-controls.controls-panel,
+    #right-controls.controls-panel { 
+        width: 100%; 
+        max-width: none;
+        height: auto; 
+    }
+
+    .vertical-tabs-container {
+        flex-direction: column;
+    }
+    .vertical-tab-buttons {
+        flex-direction: row;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+    }
+    .tab-button {
+        flex: 1;
+        border-bottom: none;
+        border-left: none !important;
+        border-bottom: 3px solid transparent;
+    }
+    .tab-button.active {
+        border-bottom-color: #007bff;
+    }
+
+    .tab-content .checkbox-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+        gap: 3px;
+    }
+    
+    .tab-content .actions {
+        flex-direction: row;
+        gap: 10px;
+    }
+    .tab-content .actions button {
+        flex: 1;
+    }
+}
+
+.error-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
