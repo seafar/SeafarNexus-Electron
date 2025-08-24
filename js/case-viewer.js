@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         mainEditBtn.addEventListener('click', () => {
             sessionStorage.setItem('currentCaseData', JSON.stringify(currentCaseData));
             sessionStorage.setItem('currentCasePath', relativePath);
-            window.open(`details.html`, '_blank');
+            window.location.href = 'details.html';
         });
 
         // Default to loading the first tab
