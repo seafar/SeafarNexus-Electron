@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>紫微斗數命盤</title>
+    <link rel="icon" href="assets/icon.png" type="image/png">
+
+    <script src="js/i18n_circle.js" defer></script>
+    <script src="js/konva.min.js" defer></script>
+    <script src="js/LunarSolarConverter.js" defer></script>
+    <script src="js/ziweistar.js" defer></script>
+    <script src="js/ziweicore.js" defer></script>
+
+    <script src="js/main_circle.js" defer></script>    
+
+    <link rel="stylesheet" type="text/css" href="css/style_circle.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="content-area">
+            
+            <div id="left-controls" class="controls-panel">
+                <div class="language-switcher">
+                    <a href="#" id="lang-tw-link">繁體</a> |
+                    <a href="#" id="lang-cn-link">简体</a>
+                </div>
+                <div class="vertical-tabs-container">
+                    <div class="vertical-tab-buttons">
+                        <button class="tab-button active" data-tab="tab-jilu" data-i18n-key="ui_tab_jilu">忌祿</button>
+                        <button class="tab-button" data-tab="tab-lu" data-i18n-key="ui_tab_lu">化祿</button>
+                        <button class="tab-button" data-tab="tab-quan" data-i18n-key="ui_tab_quan">化權</button>
+                        <button class="tab-button" data-tab="tab-ke" data-i18n-key="ui_tab_ke">化科</button>
+                        <button class="tab-button" data-tab="tab-ji" data-i18n-key="ui_tab_ji">化忌</button>
+                    </div>
+                    <div class="tab-content">
+                        <div id="tab-jilu" class="tab-pane active">
+                            <fieldset>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item"><input type="checkbox" id="stem-甲" class="stem-checkbox" value="甲"><label for="stem-甲">甲</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="stem-乙" class="stem-checkbox" value="乙"><label for="stem-乙">乙</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="stem-丙" class="stem-checkbox" value="丙"><label for="stem-丙">丙</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="stem-丁" class="stem-checkbox" value="丁"><label for="stem-丁">丁</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="stem-戊" class="stem-checkbox" value="戊"><label for="stem-戊">戊</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="stem-己" class="stem-checkbox" value="己"><label for="stem-己">己</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="stem-庚" class="stem-checkbox" value="庚"><label for="stem-庚">庚</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="stem-辛" class="stem-checkbox" value="辛"><label for="stem-辛">辛</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="stem-壬" class="stem-checkbox" value="壬"><label for="stem-壬">壬</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="stem-癸" class="stem-checkbox" value="癸"><label for="stem-癸">癸</label></div>
+                                </div>
+                                <div class="actions">
+                                    <button class="show-all" data-type="jilu" data-i18n-key="ui_show_all">全選</button>
+                                    <button class="clear-all" data-type="jilu" data-i18n-key="ui_clear_jilu">清除</button>
+                                </div>
+                            </fieldset>
+                        </div>
+                         <div id="tab-lu" class="tab-pane">
+                            <fieldset>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-子" class="transmission-checkbox" value="子" data-type="lu"><label for="lu-子">子</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-丑" class="transmission-checkbox" value="丑" data-type="lu"><label for="lu-丑">丑</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-寅" class="transmission-checkbox" value="寅" data-type="lu"><label for="lu-寅">寅</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-卯" class="transmission-checkbox" value="卯" data-type="lu"><label for="lu-卯">卯</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-辰" class="transmission-checkbox" value="辰" data-type="lu"><label for="lu-辰">辰</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-巳" class="transmission-checkbox" value="巳" data-type="lu"><label for="lu-巳">巳</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-午" class="transmission-checkbox" value="午" data-type="lu"><label for="lu-午">午</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-未" class="transmission-checkbox" value="未" data-type="lu"><label for="lu-未">未</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-申" class="transmission-checkbox" value="申" data-type="lu"><label for="lu-申">申</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-酉" class="transmission-checkbox" value="酉" data-type="lu"><label for="lu-酉">酉</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-戌" class="transmission-checkbox" value="戌" data-type="lu"><label for="lu-戌">戌</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="lu-亥" class="transmission-checkbox" value="亥" data-type="lu"><label for="lu-亥">亥</label></div>
+                                </div>
+                                <div class="actions"><button class="cycle-button cycle-button-lu" data-type="lu" data-i18n-key="ui_cycle_lu">回圈</button><button class="show-all" data-type="lu" data-i18n-key="ui_show_all">全選</button><button class="clear-all" data-type="lu" data-i18n-key="ui_clear_lu">清除</button></div>
+                            </fieldset>
+                        </div>
+                         <div id="tab-quan" class="tab-pane">
+                            <fieldset>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-子" class="transmission-checkbox" value="子" data-type="quan"><label for="quan-子">子</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-丑" class="transmission-checkbox" value="丑" data-type="quan"><label for="quan-丑">丑</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-寅" class="transmission-checkbox" value="寅" data-type="quan"><label for="quan-寅">寅</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-卯" class="transmission-checkbox" value="卯" data-type="quan"><label for="quan-卯">卯</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-辰" class="transmission-checkbox" value="辰" data-type="quan"><label for="quan-辰">辰</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-巳" class="transmission-checkbox" value="巳" data-type="quan"><label for="quan-巳">巳</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-午" class="transmission-checkbox" value="午" data-type="quan"><label for="quan-午">午</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-未" class="transmission-checkbox" value="未" data-type="quan"><label for="quan-未">未</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-申" class="transmission-checkbox" value="申" data-type="quan"><label for="quan-申">申</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-酉" class="transmission-checkbox" value="酉" data-type="quan"><label for="quan-酉">酉</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-戌" class="transmission-checkbox" value="戌" data-type="quan"><label for="quan-戌">戌</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="quan-亥" class="transmission-checkbox" value="亥" data-type="quan"><label for="quan-亥">亥</label></div>
+                                </div>
+                                <div class="actions"><button class="cycle-button cycle-button-quan" data-type="quan" data-i18n-key="ui_cycle_quan">回圈</button><button class="show-all" data-type="quan" data-i18n-key="ui_show_all">全選</button><button class="clear-all" data-type="quan" data-i18n-key="ui_clear_quan">清除</button></div>  
+                            </fieldset>
+                        </div>
+                        <div id="tab-ke" class="tab-pane">
+                            <fieldset>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-子" class="transmission-checkbox" value="子" data-type="ke"><label for="ke-子">子</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-丑" class="transmission-checkbox" value="丑" data-type="ke"><label for="ke-丑">丑</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-寅" class="transmission-checkbox" value="寅" data-type="ke"><label for="ke-寅">寅</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-卯" class="transmission-checkbox" value="卯" data-type="ke"><label for="ke-卯">卯</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-辰" class="transmission-checkbox" value="辰" data-type="ke"><label for="ke-辰">辰</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-巳" class="transmission-checkbox" value="巳" data-type="ke"><label for="ke-巳">巳</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-午" class="transmission-checkbox" value="午" data-type="ke"><label for="ke-午">午</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-未" class="transmission-checkbox" value="未" data-type="ke"><label for="ke-未">未</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-申" class="transmission-checkbox" value="申" data-type="ke"><label for="ke-申">申</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-酉" class="transmission-checkbox" value="酉" data-type="ke"><label for="ke-酉">酉</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-戌" class="transmission-checkbox" value="戌" data-type="ke"><label for="ke-戌">戌</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ke-亥" class="transmission-checkbox" value="亥" data-type="ke"><label for="ke-亥">亥</label></div>
+                                </div>
+                                <div class="actions"><button class="cycle-button cycle-button-ke" data-type="ke" data-i18n-key="ui_cycle_ke">回圈</button><button class="show-all" data-type="ke" data-i18n-key="ui_show_all">全選</button><button class="clear-all" data-type="ke" data-i18n-key="ui_clear_ke">清除</button></div>   
+                            </fieldset>
+                        </div>
+                        <div id="tab-ji" class="tab-pane">
+                            <fieldset>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-子" class="transmission-checkbox" value="子" data-type="ji"><label for="ji-子">子</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-丑" class="transmission-checkbox" value="丑" data-type="ji"><label for="ji-丑">丑</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-寅" class="transmission-checkbox" value="寅" data-type="ji"><label for="ji-寅">寅</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-卯" class="transmission-checkbox" value="卯" data-type="ji"><label for="ji-卯">卯</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-辰" class="transmission-checkbox" value="辰" data-type="ji"><label for="ji-辰">辰</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-巳" class="transmission-checkbox" value="巳" data-type="ji"><label for="ji-巳">巳</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-午" class="transmission-checkbox" value="午" data-type="ji"><label for="ji-午">午</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-未" class="transmission-checkbox" value="未" data-type="ji"><label for="ji-未">未</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-申" class="transmission-checkbox" value="申" data-type="ji"><label for="ji-申">申</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-酉" class="transmission-checkbox" value="酉" data-type="ji"><label for="ji-酉">酉</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-戌" class="transmission-checkbox" value="戌" data-type="ji"><label for="ji-戌">戌</label></div>
+                                    <div class="checkbox-item"><input type="checkbox" id="ji-亥" class="transmission-checkbox" value="亥" data-type="ji"><label for="ji-亥">亥</label></div>
+                                </div>
+                                <div class="actions"><button class="cycle-button cycle-button-ji" data-type="ji" data-i18n-key="ui_cycle_ji">回圈</button><button class="show-all" data-type="ji" data-i18n-key="ui_show_all">全選</button><button class="clear-all" data-type="ji" data-i18n-key="ui_clear_ji">清除</button></div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chart-wrapper">
+                <div id="chart-container"></div>
+            </div>
+
+            <div id="right-controls" class="controls-panel">
+                 <div class="flow-analysis-container">
+                    <div class="flow-button-group">
+                        <button id="toggle-dashian-btn" class="flow-control-btn" data-i18n-key="ui_da_shian_analysis">大限</button>
+                        <button id="toggle-flow-year-btn" class="flow-control-btn" data-i18n-key="ui_flow_year_analysis">流年</button>
+                    </div>
+                    <div id="flow-options-wrapper" class="hidden">
+                        <div id="dashian-options-group" class="flow-group hidden">
+                            <label for="dashian-select" data-i18n-key="ui_select_da_shian"></label>
+                            <select id="dashian-select"></select>
+                        </div>
+                        <div id="flow-year-options-group" class="flow-group hidden">
+                            <label for="flow-year-select" data-i18n-key="ui_select_flow_year"></label>
+                            <select id="flow-year-select"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="appearance-settings-container">
+                    <h3 data-i18n-key="ui_appearance_settings">外觀設定</h3>
+                    <div class="setting-group">
+                        <label for="bg-color-picker" data-i18n-key="ui_bg_color"></label>
+                        <input type="color" id="bg-color-picker" value="#FFFFFF">
+                    </div>
+                    <div class="setting-group">
+                        <label for="palace-text-color-picker" data-i18n-key="ui_palace_text_color"></label>
+                        <input type="color" id="palace-text-color-picker" value="#757575">
+                    </div>
+                    <div class="setting-group">
+                        <label for="crosshair-color-picker" data-i18n-key="ui_crosshair_color"></label>
+                        <input type="color" id="crosshair-color-picker" value="#757575">
+                    </div>
+                    <div class="setting-group">
+                        <label for="arrow-thickness-slider" data-i18n-key="ui_arrow_thickness"></label>
+                        <input type="range" id="arrow-thickness-slider" min="0.5" max="3" step="0.1" value="0.8">
+                    </div>
+                </div>
+
+                <div class="global-actions">
+                    <button id="clear-all-arrows-btn" data-i18n-key="ui_clear_arrows">清除所有箭頭</button>
+                    <div class="checkbox-item-bg">
+                        <input type="checkbox" id="transparent-bg-checkbox">
+                        <label for="transparent-bg-checkbox" data-i18n-key="ui_transparent_bg">透明背景 (儲存用)</label>
+                    </div>
+                    <div class="setting-group download-size-group">
+                        <label for="download-size-select" data-i18n-key="ui_download_size"></label>
+                        <select id="download-size-select">
+                            <option value="590" selected>590px</option>
+                            <option value="1080">1080px</option>
+                            <option value="1920">1920px</option>
+                        </select>
+                    </div>
+                    <button id="download-btn" data-i18n-key="ui_download_chart">下載命盤</button>
+                    <a href="index.html" id="new-chart-link" data-i18n-key="ui_new_chart">輸入新命盤</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
