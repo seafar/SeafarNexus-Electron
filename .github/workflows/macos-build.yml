@@ -2,19 +2,11 @@ name: macOS build (Electron)
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - 'v*'
 
 jobs:
-  build-mac:
-    name: Build macOS (${{ matrix.runner }} • ${{ matrix.arch }})
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      fail-fast: false
-      matrix:
-        runner: [macos-13, macos-14]
-        arch: [x64, arm64]
+  build:
+    name: Build macOS (arm64)
+    runs-on: macos-14   # Apple Silicon runner
 
     steps:
       - name: Checkout
@@ -26,15 +18,23 @@ jobs:
           node-version: 20
           cache: 'npm'
 
+      # 讓 npm 安裝更穩定
+      - name: Prep npm
+        run: |
+          npm config set fund false
+          npm config set audit false
+          npm config set prefer-offline true
+          npm config set registry https://registry.npmjs.org/
+
       - name: Install deps
         run: npm install --no-fund --no-audit
 
-      - name: Build (DMG + ZIP)
-        run: npx electron-builder --mac dmg zip --${{ matrix.arch }}
+      - name: Build (unsigned DMG + ZIP)
+        run: npx electron-builder --mac dmg zip --arm64 --publish never
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: SeafarNexus-mac-${{ matrix.arch }}
+          name: SeafarNexus-mac-arm64
           path: dist/*
           if-no-files-found: error
