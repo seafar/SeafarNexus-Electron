@@ -27,7 +27,7 @@ jobs:
           node-version: 20
 
       - name: Install deps
-        run: npm ci
+        run: npm install --no-fund --no-audit
 
       # If you don't need signing/notarization yet, this still works (unsigned).
       # If you DO want signing/notarization, add the following repo secrets:
