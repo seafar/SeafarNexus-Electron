@@ -446,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     sessionStorage.setItem('currentCaseData', JSON.stringify(chartData));
                     sessionStorage.setItem('currentCasePath', relativePath);
 
-                    const viewToOpen = target.classList.contains('edit-btn') ? 'details.html' : 'case-viewer.html';
+                    const viewToOpen = target.classList.contains('edit-btn') ? 'html/details.html' : 'html/case-viewer.html';
                     window.open(viewToOpen, '_blank');
                 } catch (error) {
                     alert(`無法讀取命例檔案: ${error.message}`);
@@ -472,7 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert(`命例 "${d.name}" 缺少有效的生日資料`);
                     return;
                 }
-                const htmlFile = type === 'circle' ? `chart_circle.html` : `chart.html`;
+                const htmlFile = type === 'circle' ? `html/chart_circle.html` : `html/chart.html`;
                 window.open(htmlFile + '?' + params.toString(), '_blank');
             } else if (target.classList.contains('analysis-btn')) {
                 alert(`「${target.dataset.type}」分析模組功能開發中。`);

@@ -1,4 +1,8 @@
-EroticScene/
-UserData/
-# 忽略專案根目錄下的 commanders.txt 檔案
-commanders.txt
+node_modules/
+dist/
+out/
+*.log
+.DS_Store
+*.pfx
+*.p12
+.env

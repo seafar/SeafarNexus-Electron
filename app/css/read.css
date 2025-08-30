@@ -137,6 +137,9 @@ html, body {
 }
 
 /* 【終極修正】針對內容區塊中的列表進行樣式優化 V3 */
+.content-section h2{
+    font-size:18px;
+}
 .content-section ul,
 .content-section ol {
     padding-left: 25px !important;

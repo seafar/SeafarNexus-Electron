@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>編輯案例</title>
+    <link rel="icon" href="../assets/icon.png" type="image/png">
+    <link rel="stylesheet" href="../css/details.css">
+
+    <script src="../assets/libs/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script src="../js/lang/i18n.js" defer></script>
+    <script src="../assets/calendar/LunarSolarConverter.js" defer></script>
+    <script src="../js/core/ziweistar.js" defer></script>
+    <script src="../js/core/ziweicore.js" defer></script>
+    <script src="../js/view/details.js" defer></script>
+</head>
+<body>
+    <div class="details-container">
+        <header class="details-header">
+            <h1 id="case-title">正在載入案例...</h1>
+            <div id="header-buttons">
+                <button id="save-all-changes-btn" class="header-btn">儲存所有變更</button>
+            </div>
+        </header>
+
+        <main class="details-body">
+            <div class="tab-bar">
+                <button class="tab-button active" data-tab="basic-info">基本資料</button>
+                <button class="tab-button" data-tab="events">生命事件(文字編輯)</button>
+                <button class="tab-button" data-tab="relationships">人際關係(文字編輯)</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="basic-info" class="tab-pane active">
+                    </div>
+                <div id="events" class="tab-pane">
+                    <textarea id="life-events-editor" style="width: 100%; height: calc(100vh - 220px); box-sizing: border-box;"></textarea>
+                </div>
+                <div id="relationships" class="tab-pane">
+                    <textarea id="relationships-editor" style="width: 100%; height: calc(100vh - 220px); box-sizing: border-box;"></textarea>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
