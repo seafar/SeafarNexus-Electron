@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - 'v*'   # push a tag like v1.0.0 to trigger a release build
+      - 'v*'
 
 jobs:
   build-mac:
@@ -13,7 +13,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # macos-13 = Intel runner (x64), macos-14 = Apple Silicon (arm64)
         runner: [macos-13, macos-14]
         arch: [x64, arm64]
 
@@ -25,30 +24,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
       - name: Install deps
         run: npm install --no-fund --no-audit
 
-      # If you don't need signing/notarization yet, this still works (unsigned).
-      # If you DO want signing/notarization, add the following repo secrets:
-      #  - CSC_LINK  (base64 of your .p12 Developer ID Application cert)
-      #  - CSC_KEY_PASSWORD
-      #  - APPLE_TEAM_ID
-      #  - APPLE_ID  (your Apple Developer account email)
-      #  - APPLE_APP_SPECIFIC_PASSWORD  (generated on appleid.apple.com)
-      # electron-builder will auto-detect and sign/notarize if these are set.
       - name: Build (DMG + ZIP)
-        env:
-          # Secrets are optional; if unset, build will be unsigned.
-          CSC_LINK: ${{ secrets.CSC_LINK }}
-          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-          APPLE_ID: ${{ secrets.APPLE_ID }}
-          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
-          # Uncomment to disable auto-discovery when you want *unsigned* build on mac:
-          # CSC_IDENTITY_AUTO_DISCOVERY: "false"
-        run: |
-          npx electron-builder --mac dmg zip --${{ matrix.arch }}
+        run: npx electron-builder --mac dmg zip --${{ matrix.arch }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
