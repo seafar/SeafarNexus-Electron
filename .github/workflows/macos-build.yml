@@ -18,7 +18,6 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      # 讓 npm 安裝更穩定
       - name: Prep npm
         run: |
           npm config set fund false
@@ -29,12 +28,13 @@ jobs:
       - name: Install deps
         run: npm install --no-fund --no-audit
 
-      - name: Build (unsigned DMG + ZIP)
-        run: npx electron-builder --mac dmg zip --arm64 --publish never
+      # ← 這兩段就是你問的，取代原本的 Build/Upload
+      - name: Build (DMG only, unsigned)
+        run: npx electron-builder --mac dmg --arm64 --publish never
 
-      - name: Upload artifacts
+      - name: Upload DMG
         uses: actions/upload-artifact@v4
         with:
           name: SeafarNexus-mac-arm64
-          path: dist/*
+          path: dist/*.dmg
           if-no-files-found: error
